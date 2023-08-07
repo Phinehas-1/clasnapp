@@ -28,7 +28,10 @@ export const AddUser = () => {
     };
 
     console.log(user);
-    // const { data } = await axios.post(``, [user]);
+    const { data } = await axios.post(`http://localhost:8080/admin/users`, [
+      user,
+    ]);
+    console.log(data);
   };
 
   const groupList = [
@@ -48,36 +51,72 @@ export const AddUser = () => {
 
   return (
     <div>
-      <form action="">
-        <div className="form-control">
-          <label htmlFor="">First Name</label>
-          <input type="text" ref={firstNameRef} className="block" required />
+      <form action="" className="p-3">
+        <div className="mt-3 mb-3">
+          <label htmlFor="" className="block mb-1">
+            First Name
+          </label>
+          <input
+            type="text"
+            ref={firstNameRef}
+            className="block border-2 py-1 px-2 w-full"
+            required
+          />
         </div>
-        <div className="form-control">
-          <label htmlFor="">Last Name</label>
-          <input type="text" ref={lastNameRef} className="block" required />
+        <div className="mt-3 mb-3">
+          <label htmlFor="" className="block mb-1">
+            Last Name
+          </label>
+          <input
+            type="text"
+            ref={lastNameRef}
+            className="block border-2 py-1 px-2 w-full"
+            required
+          />
         </div>
-        <div className="form-control">
-          <label htmlFor="">USER</label>
-          <input type="checkbox" ref={roleUserRef} value={`USER`}></input>
-          <label htmlFor="">GROUP LEAD</label>
+        <div className="mt-3 mb-3">
+          <label htmlFor="" className="mr-1">
+            User
+          </label>
+          <input
+            type="checkbox"
+            ref={roleUserRef}
+            value={`USER`}
+            className="mr-4"
+          ></input>
+          <label htmlFor="" className="mr-1">
+            Group Lead
+          </label>
           <input
             type="checkbox"
             ref={roleGroupLeaderRef}
             value={`GROUP_LEADER`}
+            className="mr-4"
           ></input>
-          <label htmlFor="">MD</label>
-          <input type="checkbox" ref={roleMDRef} value={`MD`}></input>
-          <label htmlFor="">SUPERVISOR</label>
+          <label htmlFor="" className="mr-1">
+            MD
+          </label>
+          <input
+            type="checkbox"
+            ref={roleMDRef}
+            value={`MD`}
+            className="mr-4"
+          ></input>
+          <label htmlFor="" className="mr-1">
+            Supervisor
+          </label>
           <input
             type="checkbox"
             ref={roleSupervisorRef}
             value={`SUPERVISOR`}
+            className="mr-4"
           ></input>
         </div>
-        <div className="form-control">
-          <label htmlFor="">Group</label>
-          <select ref={groupNameRef} id="">
+        <div className="mt-3 mb-5">
+          {/* <label htmlFor="" className="block mb-2">
+            Group
+          </label> */}
+          <select ref={groupNameRef} id="" className="border-2 py-1 px-2 w-full">
             {groupList.map((group) => (
               <option key={group} value={group}>
                 {group}
@@ -88,7 +127,8 @@ export const AddUser = () => {
         <div className="form-control">
           <input
             type="submit"
-            className="block"
+            value={`Register user`}
+            className="block cursor-pointer border-2 py-2 px-4 bg-gray-600 text-white w-full"
             onClick={(e) => {
               e.preventDefault();
               postUsers();
