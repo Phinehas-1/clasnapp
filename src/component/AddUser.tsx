@@ -51,8 +51,8 @@ export const AddUser = () => {
 
   return (
     <div>
-      <form action="" className="p-3">
-        <div className="mt-3 mb-3">
+      <form action="" className="p-8 space-y-7">
+        <div className="">
           <label htmlFor="" className="block mb-1">
             First Name
           </label>
@@ -63,7 +63,7 @@ export const AddUser = () => {
             required
           />
         </div>
-        <div className="mt-3 mb-3">
+        <div className="">
           <label htmlFor="" className="block mb-1">
             Last Name
           </label>
@@ -74,7 +74,7 @@ export const AddUser = () => {
             required
           />
         </div>
-        <div className="mt-3 mb-3">
+        <div className="">
           <label htmlFor="" className="mr-1">
             User
           </label>
@@ -83,6 +83,7 @@ export const AddUser = () => {
             ref={roleUserRef}
             value={`USER`}
             className="mr-4"
+            defaultChecked
           ></input>
           <label htmlFor="" className="mr-1">
             Group Lead
@@ -112,11 +113,11 @@ export const AddUser = () => {
             className="mr-4"
           ></input>
         </div>
-        <div className="mt-3 mb-5">
+        <div className="">
           {/* <label htmlFor="" className="block mb-2">
             Group
           </label> */}
-          <select ref={groupNameRef} id="" className="border-2 py-1 px-2 w-full">
+          <select ref={groupNameRef} id="" className="border-2 py-2 px-2 w-full">
             {groupList.map((group) => (
               <option key={group} value={group}>
                 {group}
@@ -124,11 +125,11 @@ export const AddUser = () => {
             ))}
           </select>
         </div>
-        <div className="form-control">
+        <div className="">
           <input
             type="submit"
             value={`Register user`}
-            className="block cursor-pointer border-2 py-2 px-4 bg-gray-600 text-white w-full"
+            className="block cursor-pointer border-2 py-2 px-4 bg-slate-600 text-white w-full"
             onClick={(e) => {
               e.preventDefault();
               postUsers();
