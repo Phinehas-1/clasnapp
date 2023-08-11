@@ -1,13 +1,12 @@
-import {  } from 'react'
-import { AddUser } from './component/AddUser'
+import {} from "react";
+import { AdminUI } from "./component/pages/Admin";
 
 function App() {
-
   return (
     <>
-      <AddUser/>
+      <AdminUI />
     </>
-  )
+  );
 }
 
-export default App
+export default App;
