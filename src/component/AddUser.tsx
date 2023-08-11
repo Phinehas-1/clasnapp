@@ -1,5 +1,6 @@
 import { useRef } from "react";
 import axios from "axios";
+import { useFlagContext } from "../custom_hooks";
 
 export const AddUser = () => {
   const firstNameRef = useRef<HTMLInputElement>(null);
@@ -8,13 +9,21 @@ export const AddUser = () => {
   const roleGroupLeaderRef = useRef<HTMLInputElement>(null);
   const roleSupervisorRef = useRef<HTMLInputElement>(null);
   const roleMDRef = useRef<HTMLInputElement>(null);
-  const rolesRef = [roleUserRef, roleGroupLeaderRef, roleMDRef, roleSupervisorRef];
+  const rolesRef = [
+    roleUserRef,
+    roleGroupLeaderRef,
+    roleMDRef,
+    roleSupervisorRef,
+  ];
   const groupNameRef = useRef<HTMLSelectElement>(null);
+
+  const { flag, setFlag } = useFlagContext();
 
   const postUsers = async () => {
     const rolesRefValues = rolesRef
       .filter((roleRef) => roleRef.current?.checked)
       .map((roleRef) => roleRef.current?.value);
+
     const user = {
       firstName: firstNameRef.current?.value,
       lastName: lastNameRef.current?.value,
@@ -27,11 +36,17 @@ export const AddUser = () => {
       groupName: groupNameRef.current?.value,
     };
 
-    console.log(user);
-    const { data } = await axios.post(`http://localhost:8080/admin/users`, [
-      user,
-    ]);
-    console.log(data);
+    try {
+      const { status } = await axios.post(`http://localhost:8080/admin/users`, [
+        user,
+      ]);
+      if (!status || status != 201) {
+        throw new Error(`Post user not completed.`);
+      }
+      setFlag({ flag: !flag });
+    } catch (error: any) {
+      console.log(`Create user failed because : ${error?.response?.data ?? error?.message ?? error}`);
+    }
   };
 
   const groupList = [
@@ -50,7 +65,7 @@ export const AddUser = () => {
   ];
 
   return (
-    <div>
+    <div className="w-full sm:w-1/3">
       <form action="" className="p-8 space-y-7">
         <div className="">
           <label htmlFor="" className="block mb-1">
@@ -114,10 +129,11 @@ export const AddUser = () => {
           ></input>
         </div>
         <div className="">
-          {/* <label htmlFor="" className="block mb-2">
-            Group
-          </label> */}
-          <select ref={groupNameRef} id="" className="border-2 py-2 px-2 w-full">
+          <select
+            ref={groupNameRef}
+            id=""
+            className="border-2 py-2 px-2 w-full"
+          >
             {groupList.map((group) => (
               <option key={group} value={group}>
                 {group}
