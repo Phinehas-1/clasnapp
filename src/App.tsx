@@ -1,10 +1,12 @@
-import {} from "react";
-import { AdminUI } from "./component/pages/Admin";
+import { Login } from "./component/forms/login";
+import "./App.css"
 
 function App() {
   return (
     <>
-      <AdminUI />
+      <div className="flex flex-col justify-center items-center h-full bg-slate-200">        
+        <Login />
+      </div>
     </>
   );
 }

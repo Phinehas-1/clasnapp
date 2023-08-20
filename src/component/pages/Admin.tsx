@@ -1,22 +1,29 @@
-import { useEffect, useState } from "react";
-import { TableData, IFlag } from "../../interfaces";
-import { AddUser } from "../AddUser";
-import { DataTable } from "../DataTable";
 import axios from "axios";
+import { useState, useEffect } from "react";
+import { TableData, IFlag } from "../../interfaces";
 import { FlagContext } from "../../custom_hooks";
+import { AddUser } from "../forms/add_user";
+import { DataTable } from "../data_table";
 
-export const AdminUI = () => {
+export const Admin = () => {
   const userData: TableData = {
     headings: [],
     items: [],
   };
 
   const [users, setUsers] = useState(userData);
-  const [flag, setFlag] = useState<IFlag>({ flag: false, setFlag: () => flag });
+  const [flag, setFlag] = useState<IFlag>({
+    flag: false,
+    setFlag: () => flag,
+  });
 
-  const fetchUsers = async () => {
+  const fetchUsers = async (token: string) => {
     try {
-      const { data } = await axios.get("http://localhost:8080/admin/users");
+      const { data } = await axios.get("http://localhost:8080/admin/users", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       return data;
     } catch (error: any) {
       console.log(
@@ -26,9 +33,11 @@ export const AdminUI = () => {
   };
 
   useEffect(() => {
+    const token = localStorage.getItem("clasnappAccessToken");
+    if (!token) return;
     const getUsers = async () => {
       try {
-        const data = await fetchUsers();
+        const data = await fetchUsers(token);
         if (Object.keys(data ?? {}).length < 1) {
           return;
         }
@@ -43,13 +52,15 @@ export const AdminUI = () => {
   }, [flag]);
 
   return (
-    <>
-      <FlagContext.Provider value={{ flag: flag.flag, setFlag }}>
-        <AddUser />
-      </FlagContext.Provider>
-      <div>
+    <div className="h-screen">
+      <section>
+        <FlagContext.Provider value={{ flag: flag.flag, setFlag }}>
+          <AddUser/>
+        </FlagContext.Provider>
+      </section>
+      <section>
         <DataTable headings={users?.headings} items={users?.items} />
-      </div>
-    </>
+      </section>
+    </div>
   );
 };
