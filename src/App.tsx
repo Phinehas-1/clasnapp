@@ -1,13 +1,14 @@
-import {  } from 'react'
-import { AddUser } from './component/AddUser'
+import { Login } from "./component/forms/login";
+import "./App.css"
 
 function App() {
-
   return (
     <>
-      <AddUser/>
+      <div className="flex flex-col justify-center items-center h-full bg-slate-200">        
+        <Login />
+      </div>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
