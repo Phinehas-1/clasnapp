@@ -3,7 +3,7 @@ import { convertObjectToString } from "../utils";
 
 export const DataTable = (data: TableData) => {
   return (
-    <div className="max-w-xs sm:max-w-screen-lg mt-3 p-1 py-3 text-xs sm:text-sm border-solid border-2 border-gray-200 md:border-none">
+    <div className="max-w-xs sm:max-w-screen-lg mt-3 ml-10 p-1 py-3 text-xs sm:text-sm border-solid border-2 border-gray-200 md:border-none">
       <span className="m-2 py-2 px-3 inline-block font-semibold bg-blue-50 rounded-2xl">
         {data.items.length > 0 && `${data.items.length} users found`}
       </span>
@@ -18,7 +18,7 @@ export const DataTable = (data: TableData) => {
                       key={index}
                       className={`px-4 py-2 w-max min-w-10 border-solid border-8 border-white bg-slate-300 text-center ${
                         index === 1 &&
-                        `text-blue-800 absolute inline-block md:relative md:table-cell border-t-0 md:border-t-8 shadow-slate-700 shadow-md`
+                        `text-blue-800 absolute inline-block md:relative md:table-cell border-t-0 md:border-t-8 shadow-slate-700 shadow-md z-10`
                       } ${index === 2 && `pl-44 md:pl-3`}`}
                     >
                       {heading}

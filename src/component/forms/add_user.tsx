@@ -72,7 +72,7 @@ export const AddUser = () => {
   ];
 
   return (
-    <div className="bg-gray-100 max-w-xs sm:max-w-max rounded-xl shadow-md text-xs md:text-sm">
+    <div className="bg-gray-100 max-w-xs ml-10 sm:max-w-max rounded-xl shadow-md text-xs md:text-sm">
       <form action="" className="p-8 space-y-7">
         <div className="">
           <label htmlFor="" className="block mb-1">
