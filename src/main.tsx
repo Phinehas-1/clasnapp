@@ -5,7 +5,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { App } from "./component/pages/app.tsx";
 import { Dashboard } from "./component/pages/dashboard.tsx";
 import { ErrorPage } from "./component/pages/error.tsx";
-import { Admin } from "./component/pages/admin.tsx";
+import { Admin } from "./component/pages/adminstration.tsx";
 
 const router = createBrowserRouter([
   {
