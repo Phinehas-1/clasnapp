@@ -1,6 +1,8 @@
+export type UserData = [string, string, string, string[], string[]];
+
 export interface TableData {
   headings: String[];
-  items: String[];
+  items: UserData[];
 }
 
 export interface IFlag {
