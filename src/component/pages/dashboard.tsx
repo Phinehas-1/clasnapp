@@ -1,5 +1,5 @@
 import jwtDecode from "jwt-decode";
-import { Outlet, useOutlet } from "react-router-dom";
+import { useOutlet } from "react-router-dom";
 import { SideBar } from "../sidebar";
 import { WelcomePage } from "./welcome";
 
