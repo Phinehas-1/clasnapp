@@ -19,10 +19,10 @@ export const Dashboard = () => {
     <>
       <header></header>
       <main className="min-h-screen sm:grid sm:grid-cols-12 sm:gap-16 ">
-        <section className="absolute top-0 z-20 sm:static sm:block sm:col-span-3">
+        <section className="fixed top-0 z-20  sm:block sm:col-span-3">
           <SideBar roles={accessToken.roles} />
         </section>
-        <section className=" grid justify-center sm:block sm:col-span-9 pt-10">
+        <section className=" grid justify-center sm:relative sm:left-56 sm:block sm:col-span-9 pt-10">
           {outlet || <WelcomePage sub={ accessToken.sub} />}
         </section>
       </main>
