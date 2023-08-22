@@ -1,6 +1,7 @@
 import jwtDecode from "jwt-decode";
-import { Outlet } from "react-router-dom";
+import { Outlet, useOutlet } from "react-router-dom";
 import { SideBar } from "../sidebar";
+import { WelcomePage } from "./welcome";
 
 export interface DecodedJwt {
   exp?: string;
@@ -8,6 +9,7 @@ export interface DecodedJwt {
   sub?: string;
 }
 export const Dashboard = () => {
+  const outlet = useOutlet();
   let accessToken: DecodedJwt = {};
   const token = localStorage.getItem("clasnappAccessToken");
   if (!token) return;
@@ -16,12 +18,12 @@ export const Dashboard = () => {
   return (
     <>
       <header></header>
-      <main className="grid sm:grid-cols-12 gap-8 sm:gap-16 min-h-full">
-        <section className="sm:col-span-2">
+      <main className="min-h-screen sm:grid sm:grid-cols-12 sm:gap-16 ">
+        <section className="absolute top-0 z-20 sm:static sm:block sm:col-span-3">
           <SideBar roles={accessToken.roles} />
         </section>
-        <section className="sm:col-span-10 md:mt-24 grid justify-center md:block">
-          <Outlet />
+        <section className=" grid justify-center sm:block sm:col-span-9 pt-10">
+          {outlet || <WelcomePage sub={ accessToken.sub} />}
         </section>
       </main>
     </>
