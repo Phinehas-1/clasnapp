@@ -52,7 +52,7 @@ export const Admin = () => {
   }, [flag]);
 
   return (
-    <div className="h-screen">
+    <div className="">
       <section>
         <FlagContext.Provider value={{ flag: flag.flag, setFlag }}>
           <AddUser/>
