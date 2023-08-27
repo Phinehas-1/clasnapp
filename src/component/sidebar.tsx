@@ -12,8 +12,8 @@ export const SideBar = ({ roles }: DecodedJwt) => {
       icon: <FaUserShield className="h-6 w-6 mr-5" />,
     },
     {
-      navName: `Report`,
-      path: ``,
+      navName: `Manage Students`,
+      path: `student`,
       flag: roles?.includes("USER"),
     },
   ];

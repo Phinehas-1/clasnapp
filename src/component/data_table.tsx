@@ -5,7 +5,7 @@ export const DataTable = (data: TableData) => {
   return (
     <div className="max-w-xs sm:max-w-screen-lg mt-3 ml-10 p-1 py-3 text-xs sm:text-sm border-solid border-2 border-gray-200 md:border-none">
       <span className="m-2 py-2 px-3 inline-block font-semibold bg-blue-50 rounded-2xl">
-        {data.items.length > 0 && `${data.items.length} users found`}
+        {data.items.length > 0 && `${data.items.length} rows found`}
       </span>
       <div className="max-w-xs sm:max-w-screen-lg overflow-x-scroll sm:overflow-hidden">
         <table className="w-max">
