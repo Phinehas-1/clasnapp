@@ -1,6 +1,9 @@
+import { useAppContext } from "../hooks";
 import { DecodedJwt } from "./dashboard";
 
 export const WelcomePage = ({ sub }: DecodedJwt) => {
+  const { isLoggedIn } = useAppContext();
+  
   return (
     <>
       <div className="grid justify-center w-full text-sm sm:text-sm">

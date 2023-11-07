@@ -1,4 +1,4 @@
-import { Login } from "../forms/login";
+import { Login } from "../component/forms/login";
 
 export function App() {
   return (

@@ -1,11 +1,13 @@
 import axios from "axios";
-import { useState, useEffect } from "react";
-import { TableData, IFlag, UserData } from "../../interfaces";
-import { FlagContext } from "../../custom_hooks";
-import { AddUser } from "../forms/add_user";
-import { DataTable } from "../data_table";
+import { useEffect, useState } from "react";
+import { DataTable } from "../component/data_table";
+import { AddUser } from "../component/forms/add_user";
+import { FlagContext } from "../custom_hooks";
+import { useAppContext } from "../hooks";
+import { IFlag, TableData, UserData } from "../interfaces";
 
 export const Admin = () => {
+  const { isLoggedIn } = useAppContext();
   const userData: TableData = {
     headings: [],
     items: [],

@@ -1,9 +1,10 @@
 import axios from "axios";
 import { useRef } from "react";
-import { useFlagContext } from "../../custom_hooks";
+import { useAttendanceContext } from "../../../hooks";
 
 export const AddStudentForm = () => {
-  const { flag, setFlag } = useFlagContext();
+  const { toggleAttendanceTableRefreshFlag: toggleRefreshAttendanceTableFlag } =
+    useAttendanceContext();
   const firstNameRef = useRef<HTMLInputElement>(null);
   const lastNameRef = useRef<HTMLInputElement>(null);
 
@@ -29,7 +30,7 @@ export const AddStudentForm = () => {
       if (!status || status != 201) {
         throw new Error(`Creation of student failed.`);
       }
-      setFlag({ flag: !flag });
+      toggleRefreshAttendanceTableFlag();
     } catch (error: any) {
       console.log(
         `Creation of student failed because : ${
