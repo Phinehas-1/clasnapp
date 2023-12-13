@@ -1,8 +1,7 @@
-import { useAppContext } from "../hooks";
 import { DecodedJwt } from "./dashboard";
 
 export const WelcomePage = ({ sub }: DecodedJwt) => {
-  const { isLoggedIn } = useAppContext();
+  // const { isLoggedIn } = useAppContext();
   
   return (
     <>
