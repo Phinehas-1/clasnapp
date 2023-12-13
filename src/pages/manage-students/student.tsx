@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { fetchAllStudents, fetchAllUserAttendancesByCalendar } from "../../api";
 import { StudentPageContext } from "../../contexts";
-import { useAppContext } from "../../hooks";
 import {
   AttendanceData,
   AttendanceTableData,
@@ -14,7 +13,7 @@ import { CreateAttendance } from "./sections/create-attendance";
 import { UpdateAttandance } from "./sections/update-attendance";
 
 export const StudentPage = () => {
-  const { isLoggedIn } = useAppContext();
+  // const { isLoggedIn } = useAppContext();
   const initStudentTableData: StudentTableData = {
     headerList: [],
     studentDataList: [],
