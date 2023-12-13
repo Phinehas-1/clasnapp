@@ -1,11 +1,13 @@
 import axios from "axios";
-import { useState, useEffect } from "react";
-import { TableData, IFlag } from "../../interfaces";
-import { FlagContext } from "../../custom_hooks";
-import { AddUser } from "../forms/add_user";
-import { DataTable } from "../data_table";
+import { useEffect, useState } from "react";
+import { DataTable } from "../component/data_table";
+import { AddUser } from "../component/forms/add_user";
+import { FlagContext } from "../custom_hooks";
+import { useAppContext } from "../hooks";
+import { IFlag, TableData, UserData } from "../interfaces";
 
 export const Admin = () => {
+  const { isLoggedIn } = useAppContext();
   const userData: TableData = {
     headings: [],
     items: [],
@@ -41,8 +43,33 @@ export const Admin = () => {
         if (Object.keys(data ?? {}).length < 1) {
           return;
         }
-        const headings = Object.keys(data[0]);
-        const items = data;
+
+        const headings = [
+          "Username",
+          "First Name",
+          "Last Name",
+          "Group",
+          "Roles",
+        ];
+        const items: UserData[] = [];
+        data.forEach(
+          (item: {
+            firstName: string;
+            lastName: string;
+            username: string;
+            id: string;
+            group: string[];
+            roles: string[];
+          }) => {
+            items.push([
+              item.username,
+              item.firstName,
+              item.lastName,
+              item.group,
+              item.roles,
+            ]);
+          }
+        );
         setUsers({ headings, items });
       } catch (error) {
         console.log(error);
@@ -52,10 +79,10 @@ export const Admin = () => {
   }, [flag]);
 
   return (
-    <div className="h-screen">
+    <div className="">
       <section>
         <FlagContext.Provider value={{ flag: flag.flag, setFlag }}>
-          <AddUser/>
+          <AddUser />
         </FlagContext.Provider>
       </section>
       <section>

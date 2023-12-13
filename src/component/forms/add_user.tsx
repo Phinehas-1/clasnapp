@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import axios from "axios";
+import { postUsers } from "../../api";
 import { useFlagContext } from "../../custom_hooks";
 
 export const AddUser = () => {
@@ -19,42 +19,42 @@ export const AddUser = () => {
 
   const { flag, setFlag } = useFlagContext();
 
-  const postUsers = async () => {
-    const rolesRefValues = rolesRef
-      .filter((roleRef) => roleRef.current?.checked)
-      .map((roleRef) => roleRef.current?.value);
+  // const postUsers = async () => {
+  //   const rolesRefValues = rolesRef
+  //     .filter((roleRef) => roleRef.current?.checked)
+  //     .map((roleRef) => roleRef.current?.value);
 
-    const user = [
-      {
-        firstName: firstNameRef.current?.value,
-        lastName: lastNameRef.current?.value,
-        password: [
-          firstNameRef.current?.value.charAt(0),
-          lastNameRef.current?.value.charAt(0),
-          "pword",
-        ].join(""),
-        roleNames: rolesRefValues,
-        groupName: groupNameRef.current?.value,
-      },
-    ];
+  //   const user = [
+  //     {
+  //       firstName: firstNameRef.current?.value,
+  //       lastName: lastNameRef.current?.value,
+  //       password: [
+  //         firstNameRef.current?.value.charAt(0),
+  //         lastNameRef.current?.value.charAt(0),
+  //         "pword",
+  //       ].join(""),
+  //       roleNames: rolesRefValues,
+  //       groupName: groupNameRef.current?.value,
+  //     },
+  //   ];
 
-    try {
-      const { status } = await axios.post(
-        `http://localhost:8080/admin/users`,
-        user
-      );
-      if (!status || status != 201) {
-        throw new Error(`Post user not completed.`);
-      }
-      setFlag({ flag: !flag });
-    } catch (error: any) {
-      console.log(
-        `Create user failed because : ${
-          error?.response?.data ?? error?.message ?? error
-        }`
-      );
-    }
-  };
+  //   try {
+  //     const { status } = await axios.post(
+  //       `http://localhost:8080/admin/users`,
+  //       user
+  //     );
+  //     if (!status || status != 201) {
+  //       throw new Error(`Post user not completed.`);
+  //     }
+  //     setFlag({ flag: !flag });
+  //   } catch (error: any) {
+  //     console.log(
+  //       `Create user failed because : ${
+  //         error?.response?.data ?? error?.message ?? error
+  //       }`
+  //     );
+  //   }
+  // };
 
   const groupList = [
     "YEAR_1",
@@ -72,7 +72,7 @@ export const AddUser = () => {
   ];
 
   return (
-    <div className="bg-gray-100 max-w-xs sm:max-w-max rounded-xl shadow-md text-xs md:text-sm">
+    <div className="bg-gray-100 max-w-xs ml-10 sm:max-w-max rounded-xl shadow-md text-xs md:text-sm">
       <form action="" className="p-8 space-y-7">
         <div className="">
           <label htmlFor="" className="block mb-1">
@@ -155,7 +155,7 @@ export const AddUser = () => {
             className="block cursor-pointer border-2 py-2 px-4 bg-slate-600 text-white w-full"
             onClick={(e) => {
               e.preventDefault();
-              postUsers();
+              postUsers(rolesRef, firstNameRef, lastNameRef, groupNameRef, setFlag, flag);
             }}
           />
         </div>
